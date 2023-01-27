@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>GeoJSON tutorial - Leaflet</title>
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.leaflet-container {
+			height: 600px;
+			width: 100%;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
+
+	
+</head>
+<body>
+
+<div id='map'></div>
+
+<script src="indonesia.geojson" type="text/javascript"></script>
+
+<script>
+	const map = L.map('map').setView([-0.4358130253216496, 99.97501909063139], 15);
+
+	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+    L.marker([-0.4358130253216496, 99.97501909063139]).bindTooltip("Rumah Nindy").addTo(map);
+    L.marker([-0.43874977115003694, 99.97654297724425]).bindTooltip("Masjid Takwa Muhammadiyah").addTo(map);
+    L.marker([-0.4395270675522569, 99.97642742976386]).bindTooltip("Kantor Camat Gasan Gadang").addTo(map);
+    L.marker([-0.4379304586811045, 99.97488329559583]).bindTooltip("Pasar Lama Gasan").addTo(map);
+    L.marker([-0.4359136890886803, 99.97516691206232]).bindTooltip("Warung Keyla").addTo(map);
+    L.marker([-0.4358506650307792, 99.97478875675114]).bindTooltip("Kedai Nasi Family Kito").addTo(map);
+    L.marker([-0.43636536148817007, 99.97490430420733]).bindTooltip("Pertamini").addTo(map);
+    L.marker([-0.4367960258438268, 99.97491480852153]).bindTooltip("Papi Cell").addTo(map);
+    L.marker([-0.43727921021347144, 99.97508287754874]).bindTooltip("Warrung Incim").addTo(map);
+    L.marker([-0.4355145367044124, 99.9758076752692]).bindTooltip("Warrung Incim").addTo(map);
+    L.marker([-0.43775189053936825, 99.97240427752273]).bindTooltip("Puskesmas Gasan gadang").addTo(map);
+
+    var KoordinatArea = [
+        
+           
+            [-0.4358130253216496, 99.97501909063139],
+            [-0.43874977115003694, 99.97654297724425],
+            [-0.4395270675522569, 99.97642742976386],
+            [-0.4379304586811045, 99.97488329559583],
+            [-0.4359136890886803, 99.97516691206232],
+            [-0.4358506650307792, 99.97478875675114],
+            [-0.43636536148817007, 99.97490430420733],
+            [-0.4367960258438268, 99.97491480852153],
+            [-0.43727921021347144, 99.97508287754874],
+            [-0.4355145367044124, 99.9758076752692],
+            [-0.43775189053936825, 99.97240427752273],
+
+    ];
+
+   var arearumah = L.polygon(KoordinatArea,{color: 'red'}).addTo(map);
+
+
+    var info_masjid = '<p style="text-align: center;"> <iframe src="image.png" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p><p style="text-align: justify;">Masjid Taqwa Muhammadiyah adalah salah satu masjid di Indonesia yang terletak di pusat Kota Padang, Sumatra Barat. Berada di kawasan Pasar Raya Padang, masjid yang pertama dibangun pada 1961 berupa bangunan berlantai dua ditandai dengan kubah.</p>';
+    L.marker([-0.43874977115003694, 99.97654297724425]).bindTooltip("Masjid Takwa Muhammadiyah").addTo(map);
+
+
+    const bicycleRentalLayer = L.geoJSON([padang], {
+
+    style(feature) {
+        return feature.properties && feature.properties.style;
+    },
+
+    onEachFeature,
+
+    pointToLayer(feature, latlng) {
+        return L.circleMarker(latlng, {
+            radius: 8,
+            fillColor: '#ff7800',
+            color: '#000',
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        });
+    }
+    }).addTo(map);
+
+</script>
+</body>
+</html>
